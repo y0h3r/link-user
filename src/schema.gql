@@ -1,0 +1,75 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type UserType {
+  id: Int
+  firstName: String!
+  lastName: String!
+  email: String!
+  gender: String!
+  createdAt: DateTime!
+  imageUrl: String
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type UsersPaginationType {
+  data: [UserType!]!
+  currentPage: Int!
+  pageSize: Int!
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+}
+
+type UserFriendType {
+  id: Int
+  user: UserType!
+  friend: UserType!
+}
+
+type Query {
+  findAllUsers(input: UsersPaginationInput!): UsersPaginationType!
+}
+
+input UsersPaginationInput {
+  limit: Int
+  page: Int
+  cursor: Int
+  pageSize: Int
+}
+
+type Mutation {
+  createUser(input: CreateUserInput!): UserType!
+  updateUser(input: UpdateUserInput!): UserType!
+  linkUserFriend(input: LinkUserFriendInput!): UserFriendType!
+}
+
+input CreateUserInput {
+  firstName: String!
+  lastName: String!
+  email: String!
+  gender: String!
+  imageUrl: String
+}
+
+input UpdateUserInput {
+  id: Int!
+  data: UpdateUserDataInput!
+}
+
+input UpdateUserDataInput {
+  firstName: String
+  lastName: String
+  email: String
+  gender: String
+  imageUrl: String
+}
+
+input LinkUserFriendInput {
+  userId: Int!
+  friendId: Int!
+}

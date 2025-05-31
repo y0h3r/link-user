@@ -1,0 +1,193 @@
+.
+├── coverage
+│   ├── clover.xml
+│   ├── coverage-final.json
+│   ├── lcov-report
+│   │   ├── base.css
+│   │   ├── block-navigation.js
+│   │   ├── favicon.png
+│   │   ├── index.html
+│   │   ├── prettify.css
+│   │   ├── prettify.js
+│   │   ├── sort-arrow-sprite.png
+│   │   ├── sorter.js
+│   │   └── src
+│   │       ├── app.controller.ts.html
+│   │       ├── app.module.ts.html
+│   │       ├── app.service.ts.html
+│   │       ├── common
+│   │       │   ├── errors
+│   │       │   │   ├── base.error.ts.html
+│   │       │   │   └── index.html
+│   │       │   ├── filter
+│   │       │   │   ├── graphql.filter.ts.html
+│   │       │   │   └── index.html
+│   │       │   └── logger
+│   │       │       ├── index.html
+│   │       │       └── logger.service.ts.html
+│   │       ├── config
+│   │       │   ├── env.schema.ts.html
+│   │       │   ├── graphql.config.ts.html
+│   │       │   ├── index.html
+│   │       │   └── typeorm.config.ts.html
+│   │       ├── index.html
+│   │       ├── main.ts.html
+│   │       ├── modules
+│   │       │   └── users
+│   │       │       ├── application
+│   │       │       │   ├── dto
+│   │       │       │   │   ├── index.html
+│   │       │       │   │   └── user-pagination.dto.ts.html
+│   │       │       │   └── use-cases
+│   │       │       │       ├── create-user.use-case.ts.html
+│   │       │       │       ├── find-all-users.use-case.ts.html
+│   │       │       │       ├── index.html
+│   │       │       │       └── update-user.use-case.ts.html
+│   │       │       ├── domain
+│   │       │       │   ├── constants
+│   │       │       │   │   ├── gender.enum.ts.html
+│   │       │       │   │   └── index.html
+│   │       │       │   └── entities
+│   │       │       │       ├── index.html
+│   │       │       │       └── user.entity.ts.html
+│   │       │       ├── index.html
+│   │       │       ├── infrastructure
+│   │       │       │   ├── graphql
+│   │       │       │   │   ├── inputs
+│   │       │       │   │   │   ├── create-user.input.ts.html
+│   │       │       │   │   │   ├── index.html
+│   │       │       │   │   │   ├── update-user.input.ts.html
+│   │       │       │   │   │   └── user-pagination.input.ts.html
+│   │       │       │   │   ├── mappers
+│   │       │       │   │   │   ├── index.html
+│   │       │       │   │   │   └── user.mapper.ts.html
+│   │       │       │   │   ├── resolvers
+│   │       │       │   │   │   ├── index.html
+│   │       │       │   │   │   └── users.resolver.ts.html
+│   │       │       │   │   └── types
+│   │       │       │   │       ├── index.html
+│   │       │       │   │       ├── user-pagination.type.ts.html
+│   │       │       │   │       └── user.type.ts.html
+│   │       │       │   └── typeorm
+│   │       │       │       ├── entities
+│   │       │       │       │   ├── index.html
+│   │       │       │       │   └── users.orm-entity.ts.html
+│   │       │       │       └── repositories
+│   │       │       │           ├── index.html
+│   │       │       │           ├── users.orm-respository.ts.html
+│   │       │       │           └── users.repository-error.ts.html
+│   │       │       └── users.module.ts.html
+│   │       └── test
+│   │           └── factories
+│   │               ├── index.html
+│   │               └── user.factory.ts.html
+│   └── lcov.info
+├── data-source.ts
+├── docker-compose.yml
+├── dockerfile
+├── eslint.config.mjs
+├── nest-cli.json
+├── package-lock.json
+├── package.json
+├── project-structure.txt
+├── README.md
+├── src
+│   ├── app.controller.spec.ts
+│   ├── app.controller.ts
+│   ├── app.module.ts
+│   ├── app.service.ts
+│   ├── common
+│   │   ├── errors
+│   │   │   └── base.error.ts
+│   │   ├── filter
+│   │   │   ├── __tests__
+│   │   │   │   └── graphql.filter.spec.ts
+│   │   │   └── graphql.filter.ts
+│   │   ├── logger
+│   │   │   ├── __tests__
+│   │   │   │   └── logger.service.spec.ts
+│   │   │   └── logger.service.ts
+│   │   └── ports
+│   │       └── logger.port.ts
+│   ├── config
+│   │   ├── env.schema.ts
+│   │   ├── graphql.config.ts
+│   │   └── typeorm.config.ts
+│   ├── main.ts
+│   ├── modules
+│   │   └── users
+│   │       ├── application
+│   │       │   ├── dto
+│   │       │   │   └── user-pagination.dto.ts
+│   │       │   ├── ports
+│   │       │   │   ├── in
+│   │       │   │   │   ├── create-user.port.ts
+│   │       │   │   │   ├── find-all-users.port.ts
+│   │       │   │   │   ├── link-user-friend.port.ts
+│   │       │   │   │   └── update-user.port.ts
+│   │       │   │   └── out
+│   │       │   │       ├── user-friend-repository.port.ts
+│   │       │   │       └── user-repository.port.ts
+│   │       │   └── use-cases
+│   │       │       ├── __tests__
+│   │       │       │   ├── create-user.use-case.spec.ts
+│   │       │       │   ├── find-all-users.use-case.spec.ts
+│   │       │       │   ├── link-user-friend.use-case.spec.ts
+│   │       │       │   └── update-user.use-case.spec.ts
+│   │       │       ├── create-user.use-case.ts
+│   │       │       ├── find-all-users.use-case.ts
+│   │       │       ├── link-user-friend.use-case.ts
+│   │       │       └── update-user.use-case.ts
+│   │       ├── domain
+│   │       │   ├── constants
+│   │       │   │   └── gender.enum.ts
+│   │       │   └── entities
+│   │       │       ├── user-friend.entity.ts
+│   │       │       └── user.entity.ts
+│   │       ├── infrastructure
+│   │       │   ├── graphql
+│   │       │   │   ├── inputs
+│   │       │   │   │   ├── create-user.input.ts
+│   │       │   │   │   ├── link-user-friend.input.ts
+│   │       │   │   │   ├── update-user.input.ts
+│   │       │   │   │   └── user-pagination.input.ts
+│   │       │   │   ├── mappers
+│   │       │   │   │   ├── __tests__
+│   │       │   │   │   │   ├── user-friend.mapper.spec.ts
+│   │       │   │   │   │   └── user.mapper.spec.ts
+│   │       │   │   │   ├── user-friend.mapper.ts
+│   │       │   │   │   └── user.mapper.ts
+│   │       │   │   ├── resolvers
+│   │       │   │   │   ├── __tests__
+│   │       │   │   │   │   ├── user-friend.resolver.spec.ts
+│   │       │   │   │   │   └── users.resolver.spec.ts
+│   │       │   │   │   ├── user-friend.resolver.ts
+│   │       │   │   │   └── users.resolver.ts
+│   │       │   │   └── types
+│   │       │   │       ├── user-friend.type.ts
+│   │       │   │       ├── user-pagination.type.ts
+│   │       │   │       └── user.type.ts
+│   │       │   └── typeorm
+│   │       │       ├── entities
+│   │       │       │   ├── user-friend.orm-entity.ts
+│   │       │       │   └── users.orm-entity.ts
+│   │       │       └── repositories
+│   │       │           ├── __tests__
+│   │       │           │   ├── user-friend.orm-respository.spec.ts
+│   │       │           │   └── users.orm-repository.spec.ts
+│   │       │           ├── user-friend.orm-respository.ts
+│   │       │           ├── user-friend.repository-error.ts
+│   │       │           ├── users.orm-respository.ts
+│   │       │           └── users.repository-error.ts
+│   │       └── users.module.ts
+│   ├── schema.gql
+│   └── test
+│       └── factories
+│           └── user.factory.ts
+├── test
+│   ├── app.e2e-spec.ts
+│   └── jest-e2e.json
+├── tsconfig.build.json
+└── tsconfig.json
+
+64 directories, 127 files
