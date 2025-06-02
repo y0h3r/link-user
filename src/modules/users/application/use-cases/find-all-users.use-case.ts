@@ -7,13 +7,14 @@ import {
 } from '@users/application/dto/user-pagination.dto';
 import { LoggerPort } from '@common/ports/logger.port';
 import { BaseError } from '@common/errors/base.error';
+import { LOGGER_PORT, USER_REPOSITORY_PORT } from '@common/constants/tokens';
 
 @Injectable()
 export class FindAllUsersUseCase implements FindAllUsersPort {
   constructor(
-    @Inject('UserRepositoryPort')
+    @Inject(USER_REPOSITORY_PORT)
     private readonly userRepository: UserRepositoryPort,
-    @Inject('LoggerPort')
+    @Inject(LOGGER_PORT)
     private readonly logger: LoggerPort,
   ) {}
 
@@ -47,6 +48,6 @@ export class FindAllUsersUseCase implements FindAllUsersPort {
 
 class FindAllUsersApplicationError extends BaseError {
   constructor(error?: Error) {
-    super('Application failed to create user', HttpStatus.BAD_REQUEST, error);
+    super('Application failed to fetch users', HttpStatus.BAD_REQUEST, error);
   }
 }

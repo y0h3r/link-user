@@ -10,21 +10,45 @@ import {
   UsersPaginationDto,
 } from '@users/application/dto/user-pagination.dto';
 import {
+  FindUserError,
   FindUsersError,
   SaveUserError,
   UpdateUserError,
   UserNotFoundError,
 } from '@users/infrastructure/typeorm/repositories/users.repository-error';
 import { LoggerPort } from '@common/ports/logger.port';
+import { LOGGER_PORT } from '@common/constants/tokens';
 
 @Injectable()
 export class UsersRepository implements UserRepositoryPort {
   constructor(
     @InjectRepository(UserOrmEntity)
     private readonly entityRepository: Repository<UserOrmEntity>,
-    @Inject('LoggerPort')
+    @Inject(LOGGER_PORT)
     private readonly logger: LoggerPort,
   ) {}
+  async findById(id: number): Promise<User> {
+    try {
+      const userEntity = await this.entityRepository.findOne({ where: { id } });
+
+      if (!userEntity) {
+        this.logger.warn('[UsersRepository] User not found', { userId: id });
+        throw new UserNotFoundError();
+      }
+
+      this.logger.info('[UsersRepository] User found successfully', {
+        userId: id,
+      });
+
+      return userEntity.toDomain();
+    } catch (error) {
+      this.logger.error('[UsersRepository] Error finding user by ID', {
+        userId: id,
+        error: error.message,
+      });
+      throw new FindUserError(error);
+    }
+  }
 
   async save(user: User): Promise<User> {
     try {
@@ -94,16 +118,17 @@ export class UsersRepository implements UserRepositoryPort {
     usersPagination: UsersPaginationDto,
   ): SelectQueryBuilder<UserOrmEntity> {
     const { page = 1, limit = 10, pageSize, cursor } = usersPagination || {};
-
     const take = pageSize || limit;
-    const skip = (page - 1) * take;
-
     const query = this.entityRepository.createQueryBuilder('user');
+
     if (cursor) {
       query.where('user.id > :cursor', { cursor: Number(cursor) });
+      query.take(take);
+    } else {
+      const skip = (page - 1) * take;
+      query.take(take).skip(skip);
     }
 
-    query.take(take).skip(skip);
     return query;
   }
 

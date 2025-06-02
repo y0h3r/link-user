@@ -10,6 +10,7 @@ import {
   UserFriendSaveError,
 } from '@users/infrastructure/typeorm/repositories/user-friend.repository-error';
 import { createFakeUserEntity } from '@test/factories/user.factory';
+import { LOGGER_PORT } from '@common/constants/tokens';
 
 const mockUser = createFakeUserEntity({ id: 1 });
 const mockFriend = createFakeUserEntity({ id: 2 });
@@ -48,7 +49,7 @@ describe('UserFriendRepository', () => {
           provide: getRepositoryToken(UserFriendOrmEntity),
           useValue: mockRepo,
         },
-        { provide: 'LoggerPort', useValue: mockLogger },
+        { provide: LOGGER_PORT, useValue: mockLogger },
       ],
     }).compile();
 

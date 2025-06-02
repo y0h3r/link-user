@@ -24,3 +24,9 @@ export class FindUsersError extends BaseError {
     super('Error finding users', HttpStatus.INTERNAL_SERVER_ERROR, error);
   }
 }
+
+export class FindUserError extends BaseError {
+  constructor(error?: Error) {
+    super('Error finding user', HttpStatus.INTERNAL_SERVER_ERROR, error);
+  }
+}

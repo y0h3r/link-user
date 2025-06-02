@@ -14,6 +14,7 @@ import {
   createFakeUserEntity,
   createFakeUserInput,
 } from '@test/factories/user.factory';
+import { LOGGER_PORT } from '@common/constants/tokens';
 
 describe('UsersRepository', () => {
   let repository: UsersRepository;
@@ -46,7 +47,7 @@ describe('UsersRepository', () => {
           provide: getRepositoryToken(UserOrmEntity),
           useValue: mockEntityRepo,
         },
-        { provide: 'LoggerPort', useValue: mockLogger },
+        { provide: LOGGER_PORT, useValue: mockLogger },
       ],
     }).compile();
 

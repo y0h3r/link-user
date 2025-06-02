@@ -4,6 +4,7 @@ import { UserRepositoryPort } from '@users/application/ports/out/user-repository
 import { CreateUserPort } from '@users/application/ports/in/create-user.port';
 import { LoggerPort } from '@common/ports/logger.port';
 import { BaseError } from '@common/errors/base.error';
+import { LOGGER_PORT, USER_REPOSITORY_PORT } from '@common/constants/tokens';
 
 interface CreateUserData {
   firstName: string;
@@ -16,9 +17,9 @@ interface CreateUserData {
 @Injectable()
 export class CreateUserUseCase implements CreateUserPort {
   constructor(
-    @Inject('UserRepositoryPort')
+    @Inject(USER_REPOSITORY_PORT)
     private readonly userRepository: UserRepositoryPort,
-    @Inject('LoggerPort')
+    @Inject(LOGGER_PORT)
     private readonly logger: LoggerPort,
   ) {}
 

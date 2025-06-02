@@ -13,15 +13,20 @@ import { UsersPaginationInput } from '@users/infrastructure/graphql/inputs/user-
 import { UsersPaginationType } from '@users/infrastructure/graphql/types/user-pagination.type';
 import { UpdateUserInput } from '@users/infrastructure/graphql/inputs/update-user.input';
 import { UpdateUserPort } from '@users/application/ports/in/update-user.port';
+import {
+  CREATE_USER_PORT,
+  FIND_ALL_USERS_PORT,
+  UPDATE_USER_PORT,
+} from '@common/constants/tokens';
 
 @Resolver(() => User)
 export class UsersResolver {
   constructor(
-    @Inject('CreateUserPort')
+    @Inject(CREATE_USER_PORT)
     private readonly createUserUseCase: CreateUserPort,
-    @Inject('FindAllUsersPort')
+    @Inject(FIND_ALL_USERS_PORT)
     private readonly findAllUsersUseCase: FindAllUsersPort,
-    @Inject('UpdateUserPort')
+    @Inject(UPDATE_USER_PORT)
     private readonly updateUserUseCase: UpdateUserPort,
   ) {}
 

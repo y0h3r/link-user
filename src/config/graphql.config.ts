@@ -8,5 +8,13 @@ export const GraphQLConfig = GraphQLModule.forRootAsync<ApolloDriverConfig>({
   inject: [ConfigService],
   useFactory: () => ({
     autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+    playground: true,
+    formatError: (error) => {
+      // Customize error message
+      return {
+        message: error.message,
+        code: error.extensions?.code,
+      };
+    },
   }),
 });

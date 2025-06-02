@@ -73,7 +73,7 @@ describe('FindAllUsersUseCase', () => {
     mockUserRepository.findAll.mockRejectedValue(error);
 
     await expect(useCase.execute(paginationInput)).rejects.toThrow(
-      'Application failed to create user',
+      'Application failed to fetch users',
     );
 
     // eslint-disable-next-line @typescript-eslint/unbound-method
