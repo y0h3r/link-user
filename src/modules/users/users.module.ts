@@ -12,40 +12,54 @@ import { UpdateUserUseCase } from '@users/application/use-cases/update-user.use-
 import { UserFriendRepository } from '@users/infrastructure/typeorm/repositories/user-friend.orm-respository';
 import { LinkUserFriendUseCase } from '@users/application/use-cases/link-user-friend.use-case';
 import { UserFriendOrmEntity } from '@users/infrastructure/typeorm/entities/user-friend.orm-entity';
+import {
+  CREATE_USER_PORT,
+  FIND_ALL_USERS_PORT,
+  LINK_USER_FRIEND_PORT,
+  LOGGER_PORT,
+  UPDATE_USER_PORT,
+  USER_FRIEND_REPOSITORY_PORT,
+  USER_REPOSITORY_PORT,
+} from '@common/constants/tokens';
+
+const REPOSITORY_PROVIDERS = [
+  {
+    provide: USER_REPOSITORY_PORT,
+    useClass: UsersRepository,
+  },
+  {
+    provide: USER_FRIEND_REPOSITORY_PORT,
+    useClass: UserFriendRepository,
+  },
+];
+
+const USE_CASE_PROVIDERS = [
+  {
+    provide: CREATE_USER_PORT,
+    useClass: CreateUserUseCase,
+  },
+  {
+    provide: UPDATE_USER_PORT,
+    useClass: UpdateUserUseCase,
+  },
+  {
+    provide: FIND_ALL_USERS_PORT,
+    useClass: FindAllUsersUseCase,
+  },
+  {
+    provide: LINK_USER_FRIEND_PORT,
+    useClass: LinkUserFriendUseCase,
+  },
+];
 @Module({
   imports: [TypeOrmModule.forFeature([UserOrmEntity, UserFriendOrmEntity])],
   providers: [
-    CreateUserUseCase,
-    FindAllUsersUseCase,
-    UpdateUserUseCase,
     UsersResolver,
     UserFriendResolver,
+    ...REPOSITORY_PROVIDERS,
+    ...USE_CASE_PROVIDERS,
     {
-      provide: 'UserRepositoryPort',
-      useClass: UsersRepository,
-    },
-    {
-      provide: 'UserFriendRepositoryPort',
-      useClass: UserFriendRepository,
-    },
-    {
-      provide: 'CreateUserPort',
-      useClass: CreateUserUseCase,
-    },
-    {
-      provide: 'UpdateUserPort',
-      useClass: UpdateUserUseCase,
-    },
-    {
-      provide: 'FindAllUsersPort',
-      useClass: FindAllUsersUseCase,
-    },
-    {
-      provide: 'LinkUserFriendPort',
-      useClass: LinkUserFriendUseCase,
-    },
-    {
-      provide: 'LoggerPort',
+      provide: LOGGER_PORT,
       useClass: LoggerService,
     },
   ],

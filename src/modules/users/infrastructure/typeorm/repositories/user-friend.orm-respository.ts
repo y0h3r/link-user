@@ -11,13 +11,14 @@ import {
   UserFriendNotFoundAfterSaveError,
 } from '@users/infrastructure/typeorm/repositories/user-friend.repository-error';
 import { BaseError } from '@common/errors/base.error';
+import { LOGGER_PORT } from '@common/constants/tokens';
 
 @Injectable()
 export class UserFriendRepository implements UserFriendRepositoryPort {
   constructor(
     @InjectRepository(UserFriendOrmEntity)
     private readonly entityRepository: Repository<UserFriendOrmEntity>,
-    @Inject('LoggerPort')
+    @Inject(LOGGER_PORT)
     private readonly logger: LoggerPort,
   ) {}
 

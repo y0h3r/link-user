@@ -12,6 +12,11 @@ import {
   createFakeUserInput,
 } from '@test/factories/user.factory';
 import { UsersPaginationInput } from '@users/infrastructure/graphql/inputs/user-pagination.input';
+import {
+  CREATE_USER_PORT,
+  FIND_ALL_USERS_PORT,
+  UPDATE_USER_PORT,
+} from '@common/constants/tokens';
 
 jest.mock('@users/infrastructure/graphql/mappers/user.mapper');
 
@@ -29,9 +34,9 @@ describe('UsersResolver', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         UsersResolver,
-        { provide: 'CreateUserPort', useValue: createUserUseCase },
-        { provide: 'FindAllUsersPort', useValue: findAllUsersUseCase },
-        { provide: 'UpdateUserPort', useValue: updateUserUseCase },
+        { provide: CREATE_USER_PORT, useValue: createUserUseCase },
+        { provide: FIND_ALL_USERS_PORT, useValue: findAllUsersUseCase },
+        { provide: UPDATE_USER_PORT, useValue: updateUserUseCase },
       ],
     }).compile();
 

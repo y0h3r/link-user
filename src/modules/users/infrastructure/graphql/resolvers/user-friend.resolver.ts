@@ -5,11 +5,12 @@ import { UserFriendMapper } from '@users/infrastructure/graphql/mappers/user-fri
 import { UserFriendType } from '@users/infrastructure/graphql/types/user-friend.type';
 import { LinkUserFriendInput } from '@users/infrastructure/graphql/inputs/link-user-friend.input';
 import { LinkUserFriendPort } from '@users/application/ports/in/link-user-friend.port';
+import { LINK_USER_FRIEND_PORT } from '@common/constants/tokens';
 
 @Resolver(() => UserFriend)
 export class UserFriendResolver {
   constructor(
-    @Inject('LinkUserFriendPort')
+    @Inject(LINK_USER_FRIEND_PORT)
     private readonly linkUserFriendUseCase: LinkUserFriendPort,
   ) {}
 

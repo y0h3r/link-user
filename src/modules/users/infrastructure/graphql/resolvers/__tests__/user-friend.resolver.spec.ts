@@ -6,6 +6,7 @@ import { UserFriendMapper } from '@users/infrastructure/graphql/mappers/user-fri
 import { LinkUserFriendInput } from '@users/infrastructure/graphql/inputs/link-user-friend.input';
 import { UserFriendType } from '@users/infrastructure/graphql/types/user-friend.type';
 import { createFakeUserEntity } from '@test/factories/user.factory';
+import { LINK_USER_FRIEND_PORT } from '@common/constants/tokens';
 
 describe('UserFriendResolver', () => {
   let resolver: UserFriendResolver;
@@ -16,7 +17,7 @@ describe('UserFriendResolver', () => {
       providers: [
         UserFriendResolver,
         {
-          provide: 'LinkUserFriendPort',
+          provide: LINK_USER_FRIEND_PORT,
           useValue: {
             execute: jest.fn(),
           },
@@ -25,7 +26,7 @@ describe('UserFriendResolver', () => {
     }).compile();
 
     resolver = module.get<UserFriendResolver>(UserFriendResolver);
-    linkUserFriendPort = module.get('LinkUserFriendPort');
+    linkUserFriendPort = module.get(LINK_USER_FRIEND_PORT);
   });
 
   it('should be defined', () => {

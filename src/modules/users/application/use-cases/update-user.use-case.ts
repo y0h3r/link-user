@@ -4,6 +4,7 @@ import { UserRepositoryPort } from '@users/application/ports/out/user-repository
 import { UpdateUserPort } from '@users/application/ports/in/update-user.port';
 import { LoggerPort } from '@common/ports/logger.port';
 import { BaseError } from '@common/errors/base.error';
+import { LOGGER_PORT, USER_REPOSITORY_PORT } from '@common/constants/tokens';
 
 interface UpdateUserData {
   firstName?: string;
@@ -16,9 +17,9 @@ interface UpdateUserData {
 @Injectable()
 export class UpdateUserUseCase implements UpdateUserPort {
   constructor(
-    @Inject('UserRepositoryPort')
+    @Inject(USER_REPOSITORY_PORT)
     private readonly userRepository: UserRepositoryPort,
-    @Inject('LoggerPort')
+    @Inject(LOGGER_PORT)
     private readonly logger: LoggerPort,
   ) {}
 

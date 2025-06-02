@@ -3,8 +3,13 @@ import { UserFriend } from '@users/domain/entities/user-friend.entity';
 import { LinkUserFriendPort } from '@users/application/ports/in/link-user-friend.port';
 import { LoggerPort } from '@common/ports/logger.port';
 import { BaseError } from '@common/errors/base.error';
-import { UserFriendRepositoryPort } from '../ports/out/user-friend-repository.port';
-import { User } from '@users/domain/entities/user.entity';
+import { UserFriendRepositoryPort } from '@users/application/ports/out/user-friend-repository.port';
+import { UserRepositoryPort } from '@users/application/ports/out/user-repository.port';
+import {
+  LOGGER_PORT,
+  USER_FRIEND_REPOSITORY_PORT,
+  USER_REPOSITORY_PORT,
+} from '@common/constants/tokens';
 
 interface LinkUserFriendData {
   userId: number;
@@ -14,23 +19,23 @@ interface LinkUserFriendData {
 @Injectable()
 export class LinkUserFriendUseCase implements LinkUserFriendPort {
   constructor(
-    @Inject('UserFriendRepositoryPort')
+    @Inject(USER_FRIEND_REPOSITORY_PORT)
     private readonly userFriendRepository: UserFriendRepositoryPort,
-    @Inject('LoggerPort')
+    @Inject(LOGGER_PORT)
     private readonly logger: LoggerPort,
+    @Inject(USER_REPOSITORY_PORT)
+    private readonly userRepository: UserRepositoryPort,
   ) {}
 
   async execute(data: LinkUserFriendData): Promise<UserFriend> {
-    const user = new User('', '', '', '', new Date(), undefined, data.userId);
-    const friend = new User(
-      '',
-      '',
-      '',
-      '',
-      new Date(),
-      undefined,
-      data.friendId,
-    );
+    const user = await this.userRepository.findById(data.userId);
+    const friend = await this.userRepository.findById(data.friendId);
+
+    if (!user || !friend) {
+      throw new LinkUserFriendApplicationError(
+        new Error('User or friend not found'),
+      );
+    }
 
     const userFriend = new UserFriend(user, friend, new Date());
 

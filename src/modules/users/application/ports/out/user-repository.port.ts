@@ -8,4 +8,5 @@ export interface UserRepositoryPort {
   save(user: User): Promise<User>;
   findAll(usersPagination: UsersPaginationDto): Promise<UsersPaginatedResponse>;
   update(id: number, updates: Partial<User>): Promise<User>;
+  findById(id: number): Promise<User>;
 }
