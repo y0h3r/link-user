@@ -63,6 +63,6 @@ const USE_CASE_PROVIDERS = [
       useClass: LoggerService,
     },
   ],
-  exports: [UserModule],
+  exports: [],
 })
 export class UserModule {}
